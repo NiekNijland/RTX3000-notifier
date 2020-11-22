@@ -16,7 +16,7 @@ namespace RTX3000_notifier.Model
             this.Websites = new List<Website>() { new Megekko(), new Azerty() };
 
             this.TimerEvent(null, null);
-            this.timer = new Timer(6000);
+            this.timer = new Timer(Constants.GetReloadInterval());
             this.timer.Elapsed += this.TimerEvent;
             this.timer.Start();
         }

@@ -16,7 +16,7 @@ namespace RTX3000_notifier.Helper
             {
                 try
                 {
-                    using StreamReader file = new StreamReader("credentials.json");
+                    using StreamReader file = new StreamReader("constants.json");
                     values = JsonConvert.DeserializeObject<Dictionary<string, string>>(file.ReadToEnd());
                 }
                 catch (Exception)
@@ -52,6 +52,20 @@ namespace RTX3000_notifier.Helper
             {
                 return "";
             }
+        }
+
+        public static int GetReloadInterval()
+        {
+            ReadJson();
+
+            int retVal = 60000;
+
+            if (values.ContainsKey("reloadinterval"))
+            {
+                int.TryParse(values["reloadinterval"], out retVal);
+            }
+
+            return retVal;
         }
     }
 }
