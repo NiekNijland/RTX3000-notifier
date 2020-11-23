@@ -5,14 +5,11 @@ C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Rel
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\RTX3000-notifier.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\RTX3000-notifier.pdb
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\DnsClient.dll
-C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\HtmlAgilityPack.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\MongoDB.Bson.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\MongoDB.Driver.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\MongoDB.Driver.Core.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\RestSharp.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\SharpCompress.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\runtimes\win\native\libzstd.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\runtimes\win\native\snappy32.dll
@@ -25,3 +22,4 @@ C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\obj\Rel
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\obj\Release\netcoreapp3.1\RTX3000-notifier.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\obj\Release\netcoreapp3.1\RTX3000-notifier.pdb
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\obj\Release\netcoreapp3.1\RTX3000-notifier.genruntimeconfig.cache
+C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Release\netcoreapp3.1\RestSharp.dll

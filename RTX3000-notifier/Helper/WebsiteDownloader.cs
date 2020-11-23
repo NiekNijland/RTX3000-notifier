@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
-using System.Web;
 using System.IO;
 using System.Net.Http;
+using RTX3000_notifier.Model;
+using RestSharp;
 
 namespace RTX3000_notifier.Helper
 {
@@ -14,34 +15,26 @@ namespace RTX3000_notifier.Helper
         {
             try
             {
-                using (var client = new WebClient())
-                using (var stream = client.OpenRead(url))
-                using (var textReader = new StreamReader(stream, Encoding.UTF8, true))
-                {
-                    return textReader.ReadToEnd();
-                }
+                WebClient client = new WebClient();
+
+                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+                Stream data = client.OpenRead(url);
+                StreamReader reader = new StreamReader(data);
+                string s = reader.ReadToEnd();
+
+                data.Close();
+                reader.Close();
+
+                return s;
             }
             catch (Exception)
             {
-                Console.WriteLine("Error downloading html with GET");
+                Logger.HtmlDownloadGetError(url);
                 return "";
             }
         }
 
-        public static string PostHtml(string url, HttpContent content)
-        {
-            try
-            {
-                var response = new HttpClient().PostAsync(url, content).Result;
 
-                string html = response.Content.ReadAsStringAsync().Result;
-                return (html);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error downloading html with POST");
-                return ("");
-            }
-        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RTX3000_notifier.Model
 {
-    public interface Website
+    public interface IWebsite
     {
         public string Url { get; set; }
 

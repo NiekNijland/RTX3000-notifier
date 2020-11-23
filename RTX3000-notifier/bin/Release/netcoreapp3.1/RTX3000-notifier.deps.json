@@ -8,10 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "RTX3000-notifier/1.0.0": {
         "dependencies": {
-          "HtmlAgilityPack": "1.11.28",
           "MongoDB.Driver": "2.11.4",
           "Newtonsoft.Json": "12.0.3",
-          "Newtonsoft.Json.Bson": "1.0.2",
           "RestSharp": "106.11.7"
         },
         "runtime": {
@@ -23,14 +21,6 @@
           "lib/netstandard2.1/DnsClient.dll": {
             "assemblyVersion": "1.3.1.0",
             "fileVersion": "1.3.1.0"
-          }
-        }
-      },
-      "HtmlAgilityPack/1.11.28": {
-        "runtime": {
-          "lib/netstandard2.0/HtmlAgilityPack.dll": {
-            "assemblyVersion": "1.11.28.0",
-            "fileVersion": "1.11.28.0"
           }
         }
       },
@@ -160,17 +150,6 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.3.23909"
-          }
-        }
-      },
-      "Newtonsoft.Json.Bson/1.0.2": {
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.2.22727"
           }
         }
       },
@@ -816,13 +795,6 @@
       "path": "dnsclient/1.3.1",
       "hashPath": "dnsclient.1.3.1.nupkg.sha512"
     },
-    "HtmlAgilityPack/1.11.28": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-aclp8f2p+xeNNR02qfMu2r4K49sNWE13VDHiLpv9SoKBDIwwy62HQIMnT+oeuyFquQRzwSGD3vUWUmtOT+eNzQ==",
-      "path": "htmlagilitypack/1.11.28",
-      "hashPath": "htmlagilitypack.1.11.28.nupkg.sha512"
-    },
     "Microsoft.NETCore.Platforms/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -885,13 +857,6 @@
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
-    },
-    "Newtonsoft.Json.Bson/1.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
-      "path": "newtonsoft.json.bson/1.0.2",
-      "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
     },
     "RestSharp/106.11.7": {
       "type": "package",

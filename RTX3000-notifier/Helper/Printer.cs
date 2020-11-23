@@ -5,7 +5,7 @@ using RTX3000_notifier.Model;
 
 namespace RTX3000_notifier.Helper
 {
-    static class StockPrinter
+    static class Printer
     {
         public static void PrintStock(Stock stock)
         {
@@ -14,6 +14,20 @@ namespace RTX3000_notifier.Helper
             foreach (KeyValuePair<Videocard, int> entry in stock.Values)
             {
                 toPrint += $"\n{Enum.GetName(typeof(Videocard), entry.Key)} : {entry.Value}";
+            }
+
+            Console.WriteLine(toPrint + "\n------------------------");
+        }
+
+        public static void PrintSubscriber(Subscriber subscriber)
+        {
+            string toPrint = "Subscriber\n";
+
+            toPrint += $"Email : {subscriber.Email}\nInterested in:";
+
+            foreach (Videocard videocard in subscriber.Interests)
+            {
+                toPrint += $"\n{Enum.GetName(typeof(Videocard), videocard)}";
             }
 
             Console.WriteLine(toPrint + "\n------------------------");

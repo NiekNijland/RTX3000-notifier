@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using RTX3000_notifier.Model;
 
 namespace RTX3000_notifier.Helper
@@ -13,11 +14,11 @@ namespace RTX3000_notifier.Helper
 
         public async static void InsertStock(Stock stock)
         {
-            var collection = database.GetCollection<BsonDocument>("stock");
+            var collection = database.GetCollection<BsonDocument>("stocks");
 
             BsonDocument document = new BsonDocument();
 
-            BsonElement timestamp = new BsonElement("timestamp", new BsonDateTime(stock.Timestamp));
+            BsonElement timestamp = new BsonElement("created_at", new BsonDateTime(stock.Timestamp));
             document.Add(timestamp);
 
             BsonDocument website = new BsonDocument();
@@ -38,6 +39,38 @@ namespace RTX3000_notifier.Helper
                 Console.WriteLine("Error interacting with MongoDB");
                 return;
             }
+        }
+
+        public static List<Subscriber> GetSubscribers()
+        {
+            List<Subscriber> ret = new List<Subscriber>();
+            var collection = database.GetCollection<BsonDocument>("subscribers");
+            List<BsonDocument> documents = collection.Find(new BsonDocument()).ToList();
+
+            foreach (BsonDocument document in documents)
+            {
+                List<Videocard> interests = new List<Videocard>();
+
+                foreach(KeyValuePair<string, string> pair in JsonConvert.DeserializeObject<Dictionary<string, string>>(document.GetValue("cards").ToString()))
+                {
+                    if(pair.Value == "true")
+                    {
+                        Videocard card;
+                        if (Enum.TryParse(pair.Key, out card))
+                        {
+                            if (Enum.IsDefined(typeof(Videocard), card))
+                            {
+                                interests.Add(card);
+                            }
+                        }
+                    }
+                }
+
+                Subscriber newSub = new Subscriber(document.GetValue("_id").ToString(), document.GetValue("email").ToString(), interests);
+                ret.Add(newSub);
+            }
+
+            return ret;
         }
     }
 }

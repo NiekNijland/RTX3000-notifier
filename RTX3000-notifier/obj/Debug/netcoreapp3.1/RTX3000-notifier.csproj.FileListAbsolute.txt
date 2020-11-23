@@ -22,3 +22,4 @@ C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Deb
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\obj\Debug\netcoreapp3.1\RTX3000-notifier.csproj.CopyComplete
 C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Niek Nijland\Documents\GitHub\RTX3000-notifier\RTX3000-notifier\bin\Debug\netcoreapp3.1\RestSharp.dll

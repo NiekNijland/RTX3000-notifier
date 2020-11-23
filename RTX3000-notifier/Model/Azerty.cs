@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Text;
 using RTX3000_notifier.Helper;
 using System.Net.Http;
+using RestSharp;
 
 namespace RTX3000_notifier.Model
 {
-    class Azerty : Website
+    class Azerty : IWebsite
     {
         public string Url { get; set; } = "https://azerty.nl/category/componenten/videokaarten/nvidia_geforce#!sorting=15&limit=96&view=rows&Videochip_generatie=GeForce_3000&levertijd=green";
 
-
-        private string GetHtml()
+        private string PostHtml()
         {
-            var values = new Dictionary<string, string>
-            {
-                {"data", "{\"service\":\"getFilterOptions\",\"route\":[\"lister\",\"componenten\",\"videokaarten\",\"nvidia_geforce \"],\"params\":{ \"navigation\":\"190\",\"keywords\":\"\",\"keyData\":\"U1RLb01jeFdrRUhZeUFieis4RE5zY0o1VHJGVTZPd0hyVWlreTlON1NJRVVGRlZDWjlZbDZ0RGdoRWVia0xMSTJMdURma1N0ZFVWUFRlcEZYV0lGN0pRdkwvSE9wMWduYWhZbCthcFo0SjRwMVJuUFZ1dUVUVWh5NncyWG5VeUJxeDc4a2lCbFBkei8zTkV6YUFZM0sxcXNlRTE4SFhoTWREbS9QcFBsVmp3PQ==\"},\"state\":{ \"sorting\":\"15\",\"limit\":\"96\",\"view\":\"rows\",\"levertijd\":\"green\",\"Videochip_generatie\":\"GeForce_3000\",\"filters\":\"levertijd:green+Videochip_generatie:GeForce_3000\"},\"callID\":1}" }
-            };
+            var client = new RestClient("https://azerty.nl/system/modules/ajax/lib/webservice/load.php");
+            client.AddDefaultHeader("content-type", "application/x-www-form-urlencoded");
+            var request = new RestRequest();
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("data", "%7B%22service%22%3A%22getFilterOptions%22%2C%22route%22%3A%5B%22lister%22%2C%22componenten%22%2C%22videokaarten+%22%5D%2C%22params%22%3A%7B%22navigation%22%3A%2239%22%2C%22keywords%22%3A%22%22%2C%22keyData%22%3A%22eThVbEhTbWJObW5WcU54TXo4Ky9YZUgwZklIVjFkNGtleml3MFlrQ204S0pPOUt5c2xTQWlLRWdrNHBibm5tU1ZxVVFLZWdPUlZwNU9NUlY4RmhneEdMOW1JNnZxTUlmaEJvYU8yWEtreHR5VjlZTGZGZUgraFlzb2I1dTl6UWoyZkxkZXQrTWZoZGFYNVVaV2xGVFoyS2NFN0JUckVOWkgyUzk4Wk85QnhzPQ%3D%3D%22%7D%2C%22state%22%3A%7B%22sorting%22%3A%2215%22%2C%22limit%22%3A%2230%22%2C%22view%22%3A%22grid%22%7D%2C%22callID%22%3A1%7D");
 
-            var content = new FormUrlEncodedContent(values);
-
-            return WebsiteDownloader.PostHtml("https://azerty.nl/system/modules/ajax/lib/webservice/load.php", content);
+            var response = client.Post(request);
+            return response.Content;
         }
 
         public Stock GetStock()
         {
-            string html = GetHtml();
+            string html = PostHtml();
 
             try
             {

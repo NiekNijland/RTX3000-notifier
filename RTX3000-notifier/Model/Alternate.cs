@@ -1,20 +1,21 @@
-﻿using System;
+﻿using RTX3000_notifier.Helper;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using RTX3000_notifier.Helper;
 
 namespace RTX3000_notifier.Model
 {
-    class Megekko : IWebsite
+    class Alternate : IWebsite
     {
-        public string Url { get; set; } = "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten?f=f_vrrd-3_s-prijs09_pp-50_p-1_d-list_cf-";
+        public string Url { get; set; } = "https://www.alternate.nl/Grafische-kaarten/GeForce-RTX-Gaming/html/listings/1534500258044?lk=21501&showFilter=false&hideFilter=false&disableFilter=false&filter_-1=31900&filter_-1=209900&filter_-2=true";
 
         public Stock GetStock()
         {
             string html = WebsiteDownloader.GetHtml(this.Url);
+            Console.WriteLine(html);
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
 
-            foreach(Videocard card in Enum.GetValues(typeof(Videocard)))
+            foreach (Videocard card in Enum.GetValues(typeof(Videocard)))
             {
                 values[card] = this.CheckHtmlForStock(html, card);
             }
@@ -24,7 +25,7 @@ namespace RTX3000_notifier.Model
 
         private int CheckHtmlForStock(string html, Videocard card)
         {
-            string str = "GeForce RTX ";
+            string str = "NVIDIA GeForce RTX ";
 
             switch (card)
             {
@@ -41,15 +42,14 @@ namespace RTX3000_notifier.Model
 
             try
             {
-                str = html.Split(new string[] { str + " <span" }, StringSplitOptions.None)[1];
-                str = str.Split(new string[] { ">(" }, StringSplitOptions.None)[1];
-                str = str.Split(new string[] { ")</span>" }, StringSplitOptions.None)[0];
+                str = html.Split(new string[] { str + "&nbsp;(" }, StringSplitOptions.None)[1];
+                str = str.Split(new string[] { ")" }, StringSplitOptions.None)[0];
                 return int.Parse(str);
             }
             catch (Exception)
             {
                 return -1;
             }
-        }  
+        }
     }
 }

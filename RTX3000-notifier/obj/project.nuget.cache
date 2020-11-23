@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JIbk8YrtrlDm4e5184gbGcLL+t/OCPoV2BYfd2XqIw0TumICLbI9ivYGyhVoS4QnED0Izq/9sAlHGLkfYnaJVw==",
+  "dgSpecHash": "3t7/tmUKftYeuVyEdil3HtesvjkJqMOa7r01nx5K0vitfS0l5Zl28PCc/9UhZsgkWvHGfYZoBEv36IBYL0Sxug==",
   "success": true,
   "projectFilePath": "C:\\Users\\Niek Nijland\\Documents\\GitHub\\RTX3000-notifier\\RTX3000-notifier\\RTX3000-notifier.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\mongodb.libmongocrypt\\1.0.0\\mongodb.libmongocrypt.1.0.0.nupkg.sha512",
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Niek Nijland\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Niek Nijland\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
