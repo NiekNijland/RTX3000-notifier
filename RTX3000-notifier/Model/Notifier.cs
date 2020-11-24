@@ -39,9 +39,9 @@ namespace RTX3000_notifier.Model
             this.timer.Start();
         }
 
-        private void GetStock(object website)
+        private void GetStock(IWebsite website)
         {
-            IWebsite website2 = (IWebsite) website;
+            IWebsite website2 = website;
             Stock stock = website2.GetStock();
 
             //Printer.PrintStock(stock);
@@ -60,7 +60,7 @@ namespace RTX3000_notifier.Model
         {
             foreach(IWebsite website in this.Websites)
             {
-                new Thread(GetStock).Start(website);
+                new Thread(() => GetStock(website)).Start();
             }
         }
 
@@ -77,7 +77,7 @@ namespace RTX3000_notifier.Model
                 {
                     if(this.StockRecords[website].Values[pair.Key] < pair.Value)
                     {
-                        Mailer.SendSubscribersNotificationAsync(stock, pair.Key);
+                        Mailer.SendNotificationsThreaded(stock, pair.Key);
                         Logger.StockUpdate(stock, pair.Key);
                     }
                 }

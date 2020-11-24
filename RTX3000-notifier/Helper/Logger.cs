@@ -11,7 +11,7 @@ namespace RTX3000_notifier.Helper
         {
             string log = $"Error reading {field} name from json";
             Console.WriteLine(log);
-            Mailer.SendErrorLogAsync(log);
+            Mailer.SendLogThreaded(log);
         }
 
         public static void EmailError(string email)
@@ -24,14 +24,14 @@ namespace RTX3000_notifier.Helper
         {
             string log = $"Error downloading html with GET: {url}";
             Console.WriteLine(log);
-            Mailer.SendErrorLogAsync(log);
+            Mailer.SendLogThreaded(log);
         }
 
         public static void HtmlDownloadPostError(string url)
         {
             string log = $"Error downloading html with POST: {url}";
             Console.WriteLine(log);
-            Mailer.SendErrorLogAsync(log);
+            Mailer.SendLogThreaded(log);
         }
 
         public static void StockUpdate(Stock stock, Videocard videocard)

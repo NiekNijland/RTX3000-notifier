@@ -10,37 +10,27 @@ namespace RTX3000_notifier.Helper
 {
     static class Mailer
     {
-        public static async void SendSubscribersNotificationAsync(Stock stock, Videocard videocard)
+        public static void SendNotificationsThreaded(Stock stock, Videocard videocard)
         {
-            await SendSubscribersNotificationTask(stock, videocard);
+            new Thread(() => SendNotifications(stock, videocard)).Start();
         }
 
-        private static Task SendSubscribersNotificationTask(Stock stock, Videocard videocard)
-        {
-            return Task.Run(() => SendSubscribersNotification(stock, videocard));
-        }
-
-        public static void SendSubscribersNotification(Stock stock, Videocard videocard)
+        public static void SendNotifications(Stock stock, Videocard videocard)
         {
             List<Subscriber> subscribers = Mongo.GetSubscribers();
 
             foreach(Subscriber subscriber in subscribers)
             {
-                SendSubscriberNotificationAsync(stock, videocard, subscriber);
+                SendNotificationThreaded(stock, videocard, subscriber);
             }
         }
         
-        public static async void SendSubscriberNotificationAsync(Stock stock, Videocard videocard, Subscriber subscriber)
+        public static void SendNotificationThreaded(Stock stock, Videocard videocard, Subscriber subscriber)
         {
-            await SendSubscriberNotificationTask(stock, videocard, subscriber);
+            Task.Run(() => SendNotification(stock, videocard, subscriber));
         }
 
-        private static Task SendSubscriberNotificationTask(Stock stock, Videocard videocard, Subscriber subscriber)
-        {
-            return Task.Run(() => SendSubscriberNotification(stock, videocard, subscriber));
-        }
-
-        public static void SendSubscriberNotification(Stock stock, Videocard videocard, Subscriber subscriber)
+        public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
@@ -57,7 +47,6 @@ namespace RTX3000_notifier.Helper
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtp = new SmtpClient(Constants.GetEmailHost());
-
 
                 mail.From = new MailAddress(Constants.GetEmailUsername());
                 mail.To.Add(email);
@@ -79,17 +68,12 @@ namespace RTX3000_notifier.Helper
             }
         }
 
-        public static async void SendErrorLogAsync(string log)
+        public static void SendLogThreaded(string log)
         {
-            await SendErrorLogTask(log);
+            Task.Run(() => SendLog(log));
         }
 
-        private static Task SendErrorLogTask(string log)
-        {
-            return Task.Run(() => SendErrorLog(log));
-        }
-
-        public static void SendErrorLog(string log)
+        public static void SendLog(string log)
         {
             string subject = $"GeForceTracker: Error Encountered";
             string body = "GeForceTracker is de volgende error tegengekomen:<br><br>" + log;
