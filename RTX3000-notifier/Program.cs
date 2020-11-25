@@ -10,7 +10,12 @@ namespace RTX3000_notifier
             Console.WriteLine("Welcome to GeForce Tracker");
             Console.WriteLine("Press any key to exit\n\n");
 
-            _ = new Notifier();
+            Notifier notifier = new Notifier();
+            notifier.TrackWebsite(new Megekko());
+            notifier.TrackWebsite(new Azerty());
+            notifier.TrackWebsite(new Cdromland());
+            notifier.TrackWebsite(new Informatique());
+            notifier.Start();
 
             Console.ReadLine();
         }

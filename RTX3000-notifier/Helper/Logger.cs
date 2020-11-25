@@ -7,7 +7,7 @@ namespace RTX3000_notifier.Helper
 {
     public static class Logger
     {
-        public static void JsonError(string field)
+        public static void JsonReadError(string field)
         {
             string log = $"Error reading {field} name from json";
             Console.WriteLine(log);
@@ -16,20 +16,19 @@ namespace RTX3000_notifier.Helper
 
         public static void EmailError(string email)
         {
-            string log = $"Error send email to: {email}";
+            string log = $"Error sending email to: {email}";
             Console.WriteLine(log);
         }
 
-        public static void HtmlDownloadGetError(string url)
+        public static void EmailSend(string email)
+        {
+            string log = $"Email send to: {email}";
+            Console.WriteLine(log);
+        }
+
+        public static void HtmlDownloadError(string url)
         {
             string log = $"Error downloading html with GET: {url}";
-            Console.WriteLine(log);
-            Mailer.SendLogThreaded(log);
-        }
-
-        public static void HtmlDownloadPostError(string url)
-        {
-            string log = $"Error downloading html with POST: {url}";
             Console.WriteLine(log);
             Mailer.SendLogThreaded(log);
         }
@@ -38,6 +37,13 @@ namespace RTX3000_notifier.Helper
         {
             string log = $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij {stock.Website.GetType().Name}";
             Console.WriteLine(log);
+        }
+
+        public static void HtmlStockCheckError(IWebsite website)
+        {
+            string log = $"Error checking html for stock at: {website.GetType().Name}";
+            Console.WriteLine(log);
+            Mailer.SendLogThreaded(log);
         }
     }
 }

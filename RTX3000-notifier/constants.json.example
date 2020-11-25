@@ -1,0 +1,11 @@
+{
+  "mongdbconnectionstring": "",
+  "mongodbdatabasename": "",
+  "reloadinterval": "",
+  "emailhost": "",
+  "emailport": "",
+  "emailusername": "",
+  "emailpassword": "",
+  "errorlogaddress": "",
+  "verbosemode": true
+}

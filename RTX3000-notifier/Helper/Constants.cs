@@ -30,7 +30,7 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("mongodbdatabasename");
+                Logger.JsonReadError("mongodbdatabasename");
                 return "";
             }
         }
@@ -43,7 +43,7 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("mongodbconnectionstring");
+                Logger.JsonReadError("mongodbconnectionstring");
                 return "";
             }
         }
@@ -59,7 +59,7 @@ namespace RTX3000_notifier.Helper
 
             if(retVal == -1)
             {
-                Logger.JsonError("reloadinterval");
+                Logger.JsonReadError("reloadinterval");
                 retVal = 600000;
             }
 
@@ -74,10 +74,11 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("emailhost");
+                Logger.JsonReadError("emailhost");
                 return "";
             }
         }
+
         public static int GetEmailPort()
         {
             int port = -1;
@@ -89,7 +90,7 @@ namespace RTX3000_notifier.Helper
 
             if (port == -1)
             {
-                Logger.JsonError("reloadinterval");
+                Logger.JsonReadError("reloadinterval");
                 port = 587;
             }
 
@@ -104,7 +105,7 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("emailusername");
+                Logger.JsonReadError("emailusername");
                 return "";
             }
         }
@@ -117,7 +118,7 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("emailpassword");
+                Logger.JsonReadError("emailpassword");
                 return "";
             }
         }
@@ -130,9 +131,19 @@ namespace RTX3000_notifier.Helper
             }
             else
             {
-                Logger.JsonError("errorlogaddress");
+                Logger.JsonReadError("errorlogaddress");
                 return "";
             }
+        }
+
+        public static bool GetVerboseMode()
+        {
+            bool ret = false;
+            if (values.ContainsKey("verbosemode"))
+            {
+                Boolean.TryParse(values["verbosemode"], out ret);
+            }
+            return ret;
         }
     }
 }

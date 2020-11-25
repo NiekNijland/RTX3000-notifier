@@ -10,42 +10,15 @@ namespace RTX3000_notifier.Model
         public string Url { get; set; } = "https://cdromland.nl/";
 
         private string url = "https://www.cdromland.nl/setfilter.php";
-        private Dictionary<string, string> parameters = new Dictionary<string, string>() { {"main", "20"}, { "sub", "3" }, { "levertijd", "3" } };
 
         public string GetProductUrl(Videocard card)
         {
             return Url;
         }
 
-        private string PostHtml()
-        {
-            try
-            {
-                var client = new RestClient(this.url);
-                client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded");
-                var request = new RestRequest();
-                request.AddHeader("Content-type", "application/x-www-form-urlencoded");
-
-                foreach (KeyValuePair<string, string> pair in this.parameters)
-                {
-                    request.AddParameter(pair.Key, pair.Value);
-                }
-
-                var response = client.Post(request);
-                var result = response.Content;
-
-                return result;
-            }
-            catch (Exception)
-            {
-                Logger.HtmlDownloadPostError(url);
-                return ("");
-            }
-        }
-
         public Stock GetStock()
         {
-            string html = PostHtml();
+            string html = DownloadHtml();
 
             Dictionary<Videocard, int> values2 = new Dictionary<Videocard, int>();
 
@@ -55,6 +28,32 @@ namespace RTX3000_notifier.Model
             }
 
             return new Stock(this, values2);
+        }
+
+        private string DownloadHtml()
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>() { { "main", "20" }, { "sub", "3" }, { "levertijd", "3" } };
+            string result = "";
+            try
+            {
+                var client = new RestClient(this.url);
+                client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded");
+                var request = new RestRequest();
+                request.AddHeader("Content-type", "application/x-www-form-urlencoded");
+
+                foreach (KeyValuePair<string, string> pair in parameters)
+                {
+                    request.AddParameter(pair.Key, pair.Value);
+                }
+
+                IRestResponse response = client.Post(request);
+                result = response.Content;
+            }
+            catch (Exception)
+            {
+                Logger.HtmlDownloadError(url);
+            }
+            return result;
         }
 
         private int CheckHtmlForStock(string html, Videocard card)
@@ -89,6 +88,7 @@ namespace RTX3000_notifier.Model
             }
             else
             {
+                Logger.HtmlStockCheckError(this);
                 return -1;
             }
         }
