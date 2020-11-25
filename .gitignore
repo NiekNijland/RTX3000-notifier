@@ -2,6 +2,7 @@
 *.suo
 *.user
 *.sln.docstates
+constants.json
 
 # Build results
 [Dd]ebug/
