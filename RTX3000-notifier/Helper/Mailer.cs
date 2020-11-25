@@ -29,7 +29,7 @@ namespace RTX3000_notifier.Helper
 
         public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
-            if (subscriber?.Interests != null && !subscriber.Interests.Contains(videocard))
+            if (subscriber?.Interests == null || !subscriber.Interests.Contains(videocard))
                 return;
 
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
