@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RTX3000_notifier
+﻿namespace RTX3000_notifier
 {
     public enum Videocard
     {

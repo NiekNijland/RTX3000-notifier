@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RTX3000_notifier.Model
+﻿namespace RTX3000_notifier.Model
 {
     public interface IWebsite
     {
