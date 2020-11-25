@@ -3,7 +3,7 @@
 
 **[Frontend repository](https://github.com/NiekNijland/RTX3000-notifier-frontend/)**
 
-##Currently scrapes from:
+## Currently scrapes from:
 - megekko.nl
 - azerty.nl
 - informatique.nl
