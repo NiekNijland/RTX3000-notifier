@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using RTX3000_notifier.Helper;
 
 namespace RTX3000_notifier.Model
@@ -8,6 +7,17 @@ namespace RTX3000_notifier.Model
     public class Informatique : IWebsite
     {
         public string Url { get; set; } = "https://www.informatique.nl/?m=sts&g=166&p=&sort=&ss=2&pr_min=&pr_max=";
+
+        public string GetProductUrl(Videocard card)
+        {
+            return card switch
+            {
+                Videocard.RTX3070 => "https://www.informatique.nl/zoeken/?q=3070&k=20201125&g=166", //Could be improved.. but i dont know the product id
+                Videocard.RTX3080 => "https://www.informatique.nl/zoeken/?q=3080&k=20201125&g=166", //Could be improved.. but i dont know the product id
+                Videocard.RTX3090 => "https://www.informatique.nl/?m=sts&g=166&p=&sort=&ss=2&pr_min=&pr_max=&at529=27549",
+                _ => Url,
+            };
+        }
 
         public Stock GetStock()
         {

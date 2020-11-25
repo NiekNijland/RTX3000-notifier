@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using RTX3000_notifier.Helper;
-using System.Net.Http;
 using RestSharp;
 
 namespace RTX3000_notifier.Model
@@ -10,6 +7,17 @@ namespace RTX3000_notifier.Model
     class Azerty : IWebsite
     {
         public string Url { get; set; } = "https://azerty.nl/category/componenten/videokaarten/nvidia_geforce#!sorting=15&limit=96&view=rows&Videochip_generatie=GeForce_3000&levertijd=green";
+
+        public string GetProductUrl(Videocard card)
+        {
+            return card switch
+            {
+                Videocard.RTX3070 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3070#!sorting=12&limit=30&view=grid",
+                Videocard.RTX3080 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3080#!sorting=12&limit=30&view=grid",
+                Videocard.RTX3090 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3090#!sorting=12&limit=30&view=grid",
+                _ => Url,
+            };
+        }
 
         private string PostHtml()
         {

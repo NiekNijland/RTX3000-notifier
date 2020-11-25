@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using RTX3000_notifier.Helper;
 
 namespace RTX3000_notifier.Model
@@ -8,6 +7,17 @@ namespace RTX3000_notifier.Model
     class Megekko : IWebsite
     {
         public string Url { get; set; } = "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten?f=f_vrrd-3_s-prijs09_pp-50_p-1_d-list_cf-";
+    
+        public string GetProductUrl(Videocard card)
+        {
+            return card switch
+            {
+                Videocard.RTX3070 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3070?f=f_vrrd-0_s-populair_pp-50_p-1_d-list_cf-",
+                Videocard.RTX3080 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3080?f=f_vrrd-1_s-populair_pp-50_p-1_d-list_cf-",
+                Videocard.RTX3090 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3090?f=f_vrrd-1_s-populair_pp-50_p-1_d-list_cf-",
+                _ => Url,
+            };
+        }
 
         public Stock GetStock()
         {

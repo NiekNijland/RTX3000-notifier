@@ -34,7 +34,7 @@ namespace RTX3000_notifier.Helper
         {
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
-                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.Url}\">{stock.Website.GetType().Name}</a><br><br>" +
+                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
 

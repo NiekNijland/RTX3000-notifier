@@ -1,7 +1,5 @@
 ﻿using System;
 using RTX3000_notifier.Model;
-using RTX3000_notifier.Helper;
-using System.Collections.Generic;
 
 namespace RTX3000_notifier
 {
@@ -12,7 +10,7 @@ namespace RTX3000_notifier
             Console.WriteLine("Welcome to GeForce Tracker");
             Console.WriteLine("Press any key to exit\n\n");
 
-            Notifier notifier = new Notifier();
+            _ = new Notifier();
 
             Console.ReadLine();
         }
