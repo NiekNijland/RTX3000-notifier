@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,7 +33,7 @@ namespace RTX3000_notifier.Helper
         {
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
-                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.Url}\">{stock.Website.GetType().Name}</a><br><br>" +
+                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
 
@@ -45,8 +44,8 @@ namespace RTX3000_notifier.Helper
         {
             try
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient smtp = new SmtpClient(Constants.GetEmailHost());
+                var mail = new MailMessage();
+                var smtp = new SmtpClient(Constants.GetEmailHost());
 
                 mail.From = new MailAddress(Constants.GetEmailUsername());
                 mail.To.Add(email);

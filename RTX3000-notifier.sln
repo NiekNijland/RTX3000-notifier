@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTX3000-notifier", "RTX3000-notifier\RTX3000-notifier.csproj", "{28C63AF4-4117-43E9-8B6E-7C6C9B0ABECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTX3000-notifier", "RTX3000-notifier\RTX3000-notifier.csproj", "{28C63AF4-4117-43E9-8B6E-7C6C9B0ABECB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{0D6BB8D0-5B9D-470B-B1D5-64C0C0854ABA}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

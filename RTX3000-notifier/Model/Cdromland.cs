@@ -2,8 +2,6 @@
 using RTX3000_notifier.Helper;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 
 namespace RTX3000_notifier.Model
 {
@@ -13,6 +11,11 @@ namespace RTX3000_notifier.Model
 
         private string url = "https://www.cdromland.nl/setfilter.php";
         private Dictionary<string, string> parameters = new Dictionary<string, string>() { {"main", "20"}, { "sub", "3" }, { "levertijd", "3" } };
+
+        public string GetProductUrl(Videocard card)
+        {
+            return Url;
+        }
 
         private string PostHtml()
         {
