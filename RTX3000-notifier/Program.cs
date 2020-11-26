@@ -15,8 +15,9 @@ namespace RTX3000_notifier
             notifier.TrackWebsite(new Azerty());
             notifier.TrackWebsite(new Cdromland());
             notifier.TrackWebsite(new Informatique());
-            notifier.Start();
+            notifier.TrackWebsite(new Coolblue());
 
+            notifier.Start();
             Console.ReadLine();
         }
     }
