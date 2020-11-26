@@ -8,3 +8,4 @@
 - azerty.nl
 - informatique.nl
 - cdromland.nl
+- coolblue.nl
