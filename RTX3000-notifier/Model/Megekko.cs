@@ -58,6 +58,7 @@ namespace RTX3000_notifier.Model
             }
             catch (Exception)
             {
+                Logger.HtmlStockCheckError(this);
                 return -1;
             }
         }  

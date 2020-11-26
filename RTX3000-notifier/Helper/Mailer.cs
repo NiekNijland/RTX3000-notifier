@@ -2,7 +2,6 @@
 using System;
 using System.Net.Mail;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace RTX3000_notifier.Helper
 {
@@ -18,38 +17,38 @@ namespace RTX3000_notifier.Helper
             var subscribers = Mongo.GetSubscribers();
             foreach (Subscriber subscriber in subscribers)
             {
-                SendNotificationThreaded(stock, videocard, subscriber);
+                
+                if (subscriber.Interests.Contains(videocard))
+                {
+                    SendNotificationThreaded(stock, videocard, subscriber);
+                }
             }
         }
 
         public static void SendNotificationThreaded(Stock stock, Videocard videocard, Subscriber subscriber)
         {
-            Task.Run(() => SendNotification(stock, videocard, subscriber));
+            new Thread(() => SendNotification(stock, videocard, subscriber)).Start();
         }
 
         public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
-            if (subscriber?.Interests == null || !subscriber.Interests.Contains(videocard))
-                return;
-
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
                         $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
-
             SendMail(subscriber.Email, subject, body);
         }
 
         public static void SendLogThreaded(string log)
         {
-            Task.Run(() => SendLog(log));
+            new Thread(() => SendLog(log)).Start();
         }
 
         public static void SendLog(string log)
         {
-            string subject = $"GeForceTracker: Error Encountered";
-            string body = "GeForceTracker is de volgende error tegengekomen:<br><br>" + log;
+            string subject = $"GeForceTracker: new log";
+            string body = "GeForceTracker meld het volgende:<br><br>" + log;
 
             SendMail(Constants.GetErrorLogAddress(), subject, body);
         }
@@ -74,6 +73,7 @@ namespace RTX3000_notifier.Helper
                 smtp.EnableSsl = true;
 
                 smtp.Send(mail);
+                Logger.EmailSend(email);
             }
             catch (Exception)
             {

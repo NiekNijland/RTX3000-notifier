@@ -1,7 +1,6 @@
 ﻿using RTX3000_notifier.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RTX3000_notifier.Helper
 {
@@ -11,7 +10,7 @@ namespace RTX3000_notifier.Helper
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
 
-            foreach (Videocard card in Enum.GetValues(typeof(Videocard)))
+            foreach(Videocard card in Enum.GetValues(typeof(Videocard)))
             {
                 values[card] = 0;
             }

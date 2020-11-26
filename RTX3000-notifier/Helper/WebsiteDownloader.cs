@@ -30,7 +30,7 @@ namespace RTX3000_notifier.Helper
             }
             catch (Exception)
             {
-                Logger.HtmlDownloadGetError(url);
+                Logger.HtmlDownloadError(url);
                 return "";
             }
         }

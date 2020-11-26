@@ -19,21 +19,9 @@ namespace RTX3000_notifier.Model
             };
         }
 
-        private string PostHtml()
-        {
-            var client = new RestClient("https://azerty.nl/system/modules/ajax/lib/webservice/load.php");
-            client.AddDefaultHeader("content-type", "application/x-www-form-urlencoded");
-            var request = new RestRequest();
-            request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("data", "%7B%22service%22%3A%22getFilterOptions%22%2C%22route%22%3A%5B%22lister%22%2C%22componenten%22%2C%22videokaarten+%22%5D%2C%22params%22%3A%7B%22navigation%22%3A%2239%22%2C%22keywords%22%3A%22%22%2C%22keyData%22%3A%22eThVbEhTbWJObW5WcU54TXo4Ky9YZUgwZklIVjFkNGtleml3MFlrQ204S0pPOUt5c2xTQWlLRWdrNHBibm5tU1ZxVVFLZWdPUlZwNU9NUlY4RmhneEdMOW1JNnZxTUlmaEJvYU8yWEtreHR5VjlZTGZGZUgraFlzb2I1dTl6UWoyZkxkZXQrTWZoZGFYNVVaV2xGVFoyS2NFN0JUckVOWkgyUzk4Wk85QnhzPQ%3D%3D%22%7D%2C%22state%22%3A%7B%22sorting%22%3A%2215%22%2C%22limit%22%3A%2230%22%2C%22view%22%3A%22grid%22%7D%2C%22callID%22%3A1%7D");
-
-            var response = client.Post(request);
-            return response.Content;
-        }
-
         public Stock GetStock()
         {
-            string html = PostHtml();
+            string html = DownloadHtml();
 
             try
             {
@@ -54,6 +42,18 @@ namespace RTX3000_notifier.Model
             }
 
             return new Stock(this, values2);
+        }
+
+        private string DownloadHtml()
+        {
+            var client = new RestClient("https://azerty.nl/system/modules/ajax/lib/webservice/load.php");
+            client.AddDefaultHeader("content-type", "application/x-www-form-urlencoded");
+            var request = new RestRequest();
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddParameter("data", "%7B%22service%22%3A%22getFilterOptions%22%2C%22route%22%3A%5B%22lister%22%2C%22componenten%22%2C%22videokaarten+%22%5D%2C%22params%22%3A%7B%22navigation%22%3A%2239%22%2C%22keywords%22%3A%22%22%2C%22keyData%22%3A%22eThVbEhTbWJObW5WcU54TXo4Ky9YZUgwZklIVjFkNGtleml3MFlrQ204S0pPOUt5c2xTQWlLRWdrNHBibm5tU1ZxVVFLZWdPUlZwNU9NUlY4RmhneEdMOW1JNnZxTUlmaEJvYU8yWEtreHR5VjlZTGZGZUgraFlzb2I1dTl6UWoyZkxkZXQrTWZoZGFYNVVaV2xGVFoyS2NFN0JUckVOWkgyUzk4Wk85QnhzPQ%3D%3D%22%7D%2C%22state%22%3A%7B%22sorting%22%3A%2215%22%2C%22limit%22%3A%2230%22%2C%22view%22%3A%22grid%22%7D%2C%22callID%22%3A1%7D");
+
+            var response = client.Post(request);
+            return response.Content;
         }
 
         private int CheckHtmlForStock(string html, Videocard card)
