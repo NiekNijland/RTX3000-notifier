@@ -8,3 +8,5 @@
 - azerty.nl
 - informatique.nl
 - cdromland.nl
+- coolblue.nl
+- cyberport.de
