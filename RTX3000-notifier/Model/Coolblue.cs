@@ -24,53 +24,23 @@ namespace RTX3000_notifier.Model
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
-            Get3070Stock(values);
-            Get3080Stock(values);
-            Get3090Stock(values);
+            GetStock(Videocard.RTX3070, "RTX 3070", values);
+            GetStock(Videocard.RTX3080, "RTX 3080", values);
+            GetStock(Videocard.RTX3090, "RTX 3080", values);
             return new Stock(this, values);
         }
 
-        private void Get3070Stock(Dictionary<Videocard, int> values)
+        private void GetStock(Videocard card, string name, Dictionary<Videocard, int> values)
         {
-            string html = WebsiteDownloader.GetHtml(GetProductUrl(Videocard.RTX3070));
+            string html = WebsiteDownloader.GetHtml(GetProductUrl(card));
 
             try
             {
                 html = html.Replace(@"\", string.Empty);
                 var splittedHtml = html.Split("<div class=\"product-card\n");
-                var filteredByName = splittedHtml.Where(o => o.Contains("RTX 3070") && !o.Contains("DOCTYPE")).ToList();
-                var filtered = filteredByName.Where(o => o.Contains("RTX 3070") && !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht")).ToList();
-                values.Add(Videocard.RTX3070, filtered.Count());
-            }
-            catch (Exception)
-            { }
-        }
-
-        private void Get3080Stock(Dictionary<Videocard, int> values)
-        {
-            string html = WebsiteDownloader.GetHtml(GetProductUrl(Videocard.RTX3080));
-
-            try
-            {
-                html = html.Replace(@"\", string.Empty);
-                var splittedHtml = html.Split("<img class=\"picture__image");
-                int counter = splittedHtml.Where(o => o.Contains("RTX 3080") && !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht") && !o.Contains("DOCTYPE")).Count();
-                values.Add(Videocard.RTX3080, counter);
-            }
-            catch (Exception)
-            { }
-        }
-
-        private void Get3090Stock(Dictionary<Videocard, int> values)
-        {
-            string html = WebsiteDownloader.GetHtml(GetProductUrl(Videocard.RTX3090));
-
-            try
-            {
-                html = html.Replace(@"\", string.Empty);
-                var splittedHtml = html.Split("<img class=\"picture__image");
-                int counter = splittedHtml.Where(o => o.Contains("RTX 3090") && !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht") && !o.Contains("DOCTYPE")).Count();
-                values.Add(Videocard.RTX3090, counter);
+                var filteredByName = splittedHtml.Where(o => o.Contains(name) && !o.Contains("DOCTYPE")).ToList();
+                var filtered = filteredByName.Where(o => !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht")).ToList();
+                values.Add(card, filtered.Count());
             }
             catch (Exception)
             { }
