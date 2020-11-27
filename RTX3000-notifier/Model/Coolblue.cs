@@ -37,9 +37,10 @@ namespace RTX3000_notifier.Model
             try
             {
                 html = html.Replace(@"\", string.Empty);
-                var splittedHtml = html.Split("<img class=\"picture__image");
-                int counter = splittedHtml.Where(o => o.Contains("RTX 3070") && !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht") && !o.Contains("DOCTYPE")).Count();
-                values.Add(Videocard.RTX3070, counter);
+                var splittedHtml = html.Split("<div class=\"product-card\n");
+                var filteredByName = splittedHtml.Where(o => o.Contains("RTX 3070") && !o.Contains("DOCTYPE")).ToList();
+                var filtered = filteredByName.Where(o => o.Contains("RTX 3070") && !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht")).ToList();
+                values.Add(Videocard.RTX3070, filtered.Count());
             }
             catch (Exception)
             { }
