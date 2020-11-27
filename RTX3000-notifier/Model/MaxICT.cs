@@ -39,7 +39,7 @@ namespace RTX3000_notifier.Model
                 html = html.Replace(@"\", string.Empty);
                 var splittedHtml = html.Split("<div class=\"product\"");
                 var filteredByName = splittedHtml.Where(o => o.Contains(name) && !o.Contains("DOCTYPE")).ToList();
-                var filtered = filteredByName.Where(o => o.Contains("op voorraad")).ToList();
+                var filtered = filteredByName.Where(o => !o.Contains("0 op voorraad")).ToList();
                 values.Add(card, filtered.Count());
             }
             catch (Exception)
