@@ -26,7 +26,7 @@ namespace RTX3000_notifier.Model
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
             GetStock(Videocard.RTX3070, "RTX 3070", values);
             GetStock(Videocard.RTX3080, "RTX 3080", values);
-            GetStock(Videocard.RTX3090, "RTX 3080", values);
+            GetStock(Videocard.RTX3090, "RTX 3090", values);
             return new Stock(this, values);
         }
 
