@@ -17,7 +17,8 @@ namespace RTX3000_notifier
             notifier.TrackWebsite(new Informatique());
             notifier.TrackWebsite(new Coolblue());
             notifier.TrackWebsite(new Cyberport());
-            
+            notifier.TrackWebsite(new Amazon());
+
             //notifier.TrackWebsite(new MaxICT());
 
             notifier.Start();
