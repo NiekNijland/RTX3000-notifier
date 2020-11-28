@@ -10,3 +10,4 @@
 - cdromland.nl
 - coolblue.nl
 - cyberport.de
+- maxict.nl

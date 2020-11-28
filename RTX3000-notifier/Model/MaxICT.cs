@@ -6,17 +6,17 @@ using RTX3000_notifier.Helper;
 
 namespace RTX3000_notifier.Model
 {
-    class Coolblue : IWebsite
+    class MaxICT : IWebsite
     {
-        public string Url { get; set; } = "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie";
+        public string Url { get; set; } = "https://maxict.nl/componenten/videokaarten/nvidia-rtx?filters[grafische-processor][]=GeForce RTX 3070&filters[grafische-processor][]=GeForce RTX 3080&filters[grafische-processor][]=GeForce RTX 3090";
 
         public string GetProductUrl(Videocard card)
         {
             return card switch
             {
-                Videocard.RTX3070 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-rtx-3070",
-                Videocard.RTX3080 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie/nvidia-geforce-rtx-3080",
-                Videocard.RTX3090 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie/nvidia-geforce-rtx-3090",
+                Videocard.RTX3070 => "https://maxict.nl/componenten/videokaarten/nvidia-rtx?filters[grafische-processor][]=GeForce RTX 3070",
+                Videocard.RTX3080 => "https://maxict.nl/componenten/videokaarten/nvidia-rtx?filters[grafische-processor][]=GeForce RTX 3080",
+                Videocard.RTX3090 => "https://maxict.nl/componenten/videokaarten/nvidia-rtx?filters[grafische-processor][]=GeForce RTX 3090",
                 _ => Url,
             };
         }
@@ -37,9 +37,9 @@ namespace RTX3000_notifier.Model
             try
             {
                 html = html.Replace(@"\", string.Empty);
-                var splittedHtml = html.Split("<div class=\"product-card\n");
+                var splittedHtml = html.Split("<div class=\"product\"");
                 var filteredByName = splittedHtml.Where(o => o.Contains(name) && !o.Contains("DOCTYPE")).ToList();
-                var filtered = filteredByName.Where(o => !o.Contains("Binnenkort leverbaar") && !o.Contains("Tijdelijk uitverkocht")).ToList();
+                var filtered = filteredByName.Where(o => !o.Contains("0 op voorraad")).ToList();
                 values.Add(card, filtered.Count());
             }
             catch (Exception)
