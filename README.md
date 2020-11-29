@@ -10,4 +10,7 @@
 - cdromland.nl
 - coolblue.nl
 - cyberport.de
+- centralpoint.nl
+
+disabled for now:
 - maxict.nl
