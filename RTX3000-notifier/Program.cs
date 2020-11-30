@@ -27,7 +27,7 @@ namespace RTX3000_notifier
             notifier.TrackWebsite(new Cyberport());
             notifier.TrackWebsite(new Amazon());
             notifier.TrackWebsite(new Centralpoint());
-
+            notifier.TrackWebsite(new PCKing());
             //notifier.TrackWebsite(new MaxICT());
 
             notifier.Start();
