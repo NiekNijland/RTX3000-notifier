@@ -1,10 +1,18 @@
-﻿using System;
-using RTX3000_notifier.Model;
+﻿using RTX3000_notifier.Model;
+using RTX3000_notifier.Shop;
+using System;
 
 namespace RTX3000_notifier
 {
+    /// <summary>
+    /// Defines the <see cref="Program" />.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// The Main.
+        /// </summary>
+        /// <param name="args">The args<see cref="string[]"/>.</param>
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to GeForce Tracker");

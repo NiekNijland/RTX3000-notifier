@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
-using System.Net.Http;
-using RTX3000_notifier.Model;
-using RestSharp;
+using System.Net;
 
 namespace RTX3000_notifier.Helper
 {
+    /// <summary>
+    /// Defines the <see cref="WebsiteDownloader" />.
+    /// </summary>
     static class WebsiteDownloader
     {
+        #region Public
+
+        /// <summary>
+        /// Download the html content.
+        /// </summary>
+        /// <param name="url">The url<see cref="string"/>.</param>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetHtml(string url)
         {
             try
@@ -35,6 +40,6 @@ namespace RTX3000_notifier.Helper
             }
         }
 
-
+        #endregion
     }
 }
