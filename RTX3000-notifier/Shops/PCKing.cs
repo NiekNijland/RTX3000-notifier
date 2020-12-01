@@ -16,7 +16,7 @@ namespace RTX3000_notifier.Shop
         /// <summary>
         /// Gets or sets the Url.
         /// </summary>
-        public string Url { get; set; } = "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3080%2C+3070%2C+3060&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634";
+        public string Url { get; set; } = "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060%2C+3080%2C+3070%2C+3060&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634";
 
         #endregion
 
@@ -31,6 +31,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
                 Videocard.RTX3070 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3070&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
                 Videocard.RTX3080 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3080&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
                 Videocard.RTX3090 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3090&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
@@ -45,6 +46,7 @@ namespace RTX3000_notifier.Shop
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
+            GetStock(Videocard.RTX3060TI, "RTX 3060", values);
             GetStock(Videocard.RTX3070, "RTX 3070", values);
             GetStock(Videocard.RTX3080, "RTX 3080", values);
             GetStock(Videocard.RTX3090, "RTX 3090", values);

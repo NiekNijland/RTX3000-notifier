@@ -30,6 +30,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.informatique.nl/zoeken/?q=3060&k=20201125&g=166", //Could be improved.. but i dont know the product id
                 Videocard.RTX3070 => "https://www.informatique.nl/zoeken/?q=3070&k=20201125&g=166", //Could be improved.. but i dont know the product id
                 Videocard.RTX3080 => "https://www.informatique.nl/zoeken/?q=3080&k=20201125&g=166", //Could be improved.. but i dont know the product id
                 Videocard.RTX3090 => "https://www.informatique.nl/?m=sts&g=166&p=&sort=&ss=2&pr_min=&pr_max=&at529=27549",
@@ -78,6 +79,9 @@ namespace RTX3000_notifier.Shop
 
             switch (card)
             {
+                case Videocard.RTX3060TI:
+                    str += "3060";
+                    break;
                 case Videocard.RTX3070:
                     str += "3070";
                     break;

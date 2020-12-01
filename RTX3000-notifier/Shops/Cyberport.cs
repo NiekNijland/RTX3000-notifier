@@ -33,6 +33,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.cyberport.de/pc-und-zubehoer/komponenten/grafikkarten/nvidia-fuer-gaming.html?productsPerPage=50&sort=popularity&2E_Grafikchip=GeForce%20RTX%203060&page=1&stockLevelStatus=IMMEDIATELY",
                 Videocard.RTX3070 => "https://www.cyberport.de/pc-und-zubehoer/komponenten/grafikkarten/nvidia-fuer-gaming.html?productsPerPage=50&sort=popularity&2E_Grafikchip=GeForce%20RTX%203070&page=1&stockLevelStatus=IMMEDIATELY",
                 Videocard.RTX3080 => "https://www.cyberport.de/pc-und-zubehoer/komponenten/grafikkarten/nvidia-fuer-gaming.html?productsPerPage=50&sort=popularity&2E_Grafikchip=GeForce%20RTX%203080&page=1&stockLevelStatus=IMMEDIATELY",
                 Videocard.RTX3090 => "https://www.cyberport.de/pc-und-zubehoer/komponenten/grafikkarten/nvidia-fuer-gaming.html?productsPerPage=50&sort=popularity&2E_Grafikchip=GeForce%20RTX%203090&page=1&stockLevelStatus=IMMEDIATELY",
@@ -47,6 +48,7 @@ namespace RTX3000_notifier.Shop
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
+            values.Add(Videocard.RTX3060TI, GetStock(GetProductUrl(Videocard.RTX3060TI), "RTX 3060", values));
             values.Add(Videocard.RTX3070, GetStock(GetProductUrl(Videocard.RTX3070), "RTX 3070", values));
             values.Add(Videocard.RTX3080, GetStock(GetProductUrl(Videocard.RTX3080), "RTX 3080", values));
             values.Add(Videocard.RTX3090, GetStock(GetProductUrl(Videocard.RTX3090), "RTX 3090", values));
