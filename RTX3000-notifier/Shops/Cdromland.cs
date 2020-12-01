@@ -1,21 +1,50 @@
 ﻿using RestSharp;
 using RTX3000_notifier.Helper;
+using RTX3000_notifier.Model;
 using System;
 using System.Collections.Generic;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Cdromland" />.
+    /// </summary>
     class Cdromland : IWebsite
     {
-        public string Url { get; set; } = "https://cdromland.nl/";
+        #region Variables
 
+        /// <summary>
+        /// Defines the url.
+        /// </summary>
         private string url = "https://www.cdromland.nl/setfilter.php";
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
+        public string Url { get; set; } = "https://cdromland.nl/";
+
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// /// The direct product url.
         public string GetProductUrl(Videocard card)
         {
             return Url;
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             string html = DownloadHtml();
@@ -30,6 +59,13 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values2);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Download html content.
+        /// </summary>
         private string DownloadHtml()
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>() { { "main", "20" }, { "sub", "3" }, { "levertijd", "3" } };
@@ -56,6 +92,12 @@ namespace RTX3000_notifier.Model
             return result;
         }
 
+        /// <summary>
+        /// Parse the html to retrieve the stock.
+        /// </summary>
+        /// <param name="html">The html<see cref="string"/>.</param>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <returns>The <see cref="int"/>.</returns>
         private int CheckHtmlForStock(string html, Videocard card)
         {
             string str = "GeForce RTX ";
@@ -92,5 +134,7 @@ namespace RTX3000_notifier.Model
                 return -1;
             }
         }
+
+        #endregion
     }
 }

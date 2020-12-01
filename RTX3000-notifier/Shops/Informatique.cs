@@ -1,13 +1,31 @@
-﻿using System;
+﻿using RTX3000_notifier.Helper;
+using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
-using RTX3000_notifier.Helper;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Informatique" />.
+    /// </summary>
     public class Informatique : IWebsite
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
         public string Url { get; set; } = "https://www.informatique.nl/?m=sts&g=166&p=&sort=&ss=2&pr_min=&pr_max=";
 
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// /// The direct product url.
         public string GetProductUrl(Videocard card)
         {
             return card switch
@@ -19,6 +37,10 @@ namespace RTX3000_notifier.Model
             };
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             string html = WebsiteDownloader.GetHtml(this.Url);
@@ -30,9 +52,7 @@ namespace RTX3000_notifier.Model
                 html = html.Split(new string[] { "</ul>" }, StringSplitOptions.None)[0];
             }
             catch
-            {
-
-            }
+            {}
 
             foreach (Videocard card in Enum.GetValues(typeof(Videocard)))
             {
@@ -42,6 +62,16 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Parse the html to retrieve the stock.
+        /// </summary>
+        /// <param name="html">The html<see cref="string"/>.</param>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <returns>The <see cref="int"/>.</returns>
         private int CheckHtmlForStock(string html, Videocard card)
         {
             string str = "RTX ";
@@ -77,5 +107,7 @@ namespace RTX3000_notifier.Model
                 return -1;
             }
         }
+
+        #endregion
     }
 }

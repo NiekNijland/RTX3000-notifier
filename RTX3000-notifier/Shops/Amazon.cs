@@ -1,14 +1,32 @@
-﻿using System;
+﻿using RTX3000_notifier.Helper;
+using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RTX3000_notifier.Helper;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Amazon" />.
+    /// </summary>
     class Amazon : IWebsite
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
         public string Url { get; set; } = "https://www.amazon.nl/s?k=Grafische+kaart+RTX+3070&i=electronics&__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss";
-    
+
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <returns>The <see cref="string"/> Url.</returns>
         public string GetProductUrl(Videocard card)
         {
             return card switch
@@ -20,6 +38,10 @@ namespace RTX3000_notifier.Model
             };
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
@@ -29,6 +51,16 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <param name="name">The name<see cref="string"/>.</param>
+        /// <param name="values">The values<see cref="Dictionary{Videocard, int}"/>.</param>
         private void GetStock(Videocard card, string name, Dictionary<Videocard, int> values)
         {
             string html = WebsiteDownloader.GetHtml(GetProductUrl(card));
@@ -44,5 +76,7 @@ namespace RTX3000_notifier.Model
             catch (Exception)
             { }
         }
+
+        #endregion
     }
 }

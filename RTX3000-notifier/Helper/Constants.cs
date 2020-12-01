@@ -5,23 +5,26 @@ using System.IO;
 
 namespace RTX3000_notifier.Helper
 {
+    /// <summary>
+    /// Defines the <see cref="Constants" />.
+    /// </summary>
     static class Constants
     {
+        #region Variables
+
+        /// <summary>
+        /// Defines the values.
+        /// </summary>
         public static Dictionary<string, string> values = ReadJson();
 
-        private static Dictionary<string, string> ReadJson()
-        {
-            try
-            {
-                using StreamReader file = new StreamReader("constants.json");
-                return JsonConvert.DeserializeObject<Dictionary<string, string>>(file.ReadToEnd());
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error reading constants.json");
-            }
-        }
+        #endregion
 
+        #region Public
+
+        /// <summary>
+        /// The MongoDB name.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetMongoDatabaseName()
         {
             if (values.ContainsKey("mongodbdatabasename"))
@@ -35,6 +38,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// The MongoDB connection string.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetMongoConnectionString()
         {
             if (values.ContainsKey("mongdbconnectionstring"))
@@ -48,6 +55,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// The reload interval.
+        /// </summary>
+        /// <returns>The <see cref="int"/>.</returns>
         public static int GetReloadInterval()
         {
             int retVal = -1;
@@ -57,7 +68,7 @@ namespace RTX3000_notifier.Helper
                 int.TryParse(values["reloadinterval"], out retVal);
             }
 
-            if(retVal == -1)
+            if (retVal == -1)
             {
                 Logger.JsonReadError("reloadinterval");
                 retVal = 600000;
@@ -66,6 +77,10 @@ namespace RTX3000_notifier.Helper
             return retVal;
         }
 
+        /// <summary>
+        /// The email smtp host address.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetEmailHost()
         {
             if (values.ContainsKey("emailhost"))
@@ -79,6 +94,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// The email smtp host ip address.
+        /// </summary>
+        /// <returns>The <see cref="int"/>.</returns>
         public static int GetEmailPort()
         {
             int port = -1;
@@ -97,6 +116,10 @@ namespace RTX3000_notifier.Helper
             return port;
         }
 
+        /// <summary>
+        /// The email username.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetEmailUsername()
         {
             if (values.ContainsKey("emailusername"))
@@ -110,6 +133,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// The email password.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetEmailPassword()
         {
             if (values.ContainsKey("emailpassword"))
@@ -123,6 +150,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// The error log email address.
+        /// </summary>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetErrorLogAddress()
         {
             if (values.ContainsKey("errorlogaddress"))
@@ -136,6 +167,10 @@ namespace RTX3000_notifier.Helper
             }
         }
 
+        /// <summary>
+        /// Set the logging to verbose.
+        /// </summary>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool GetVerboseMode()
         {
             bool ret = false;
@@ -145,5 +180,28 @@ namespace RTX3000_notifier.Helper
             }
             return ret;
         }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Read the constants.json.
+        /// </summary>
+        /// <returns>The <see cref="Dictionary{string, string}"/>.</returns>
+        private static Dictionary<string, string> ReadJson()
+        {
+            try
+            {
+                using StreamReader file = new StreamReader("constants.json");
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(file.ReadToEnd());
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error reading constants.json");
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,12 +1,20 @@
-﻿using System;
+﻿using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using RTX3000_notifier.Model;
 
 namespace RTX3000_notifier.Helper
 {
+    /// <summary>
+    /// Defines the <see cref="Printer" />.
+    /// </summary>
     static class Printer
     {
+        #region Public
+
+        /// <summary>
+        /// Print the new stock values.
+        /// </summary>
+        /// <param name="stock">The stock<see cref="Stock"/>.</param>
         public static void PrintStock(Stock stock)
         {
             string toPrint = stock.Website.GetType().Name + " -- " + stock.Timestamp.ToString();
@@ -19,6 +27,10 @@ namespace RTX3000_notifier.Helper
             Console.WriteLine(toPrint + "\n------------------------");
         }
 
+        /// <summary>
+        /// Print the subscriber info.
+        /// </summary>
+        /// <param name="subscriber">The subscriber<see cref="Subscriber"/>.</param>
         public static void PrintSubscriber(Subscriber subscriber)
         {
             string toPrint = "Subscriber\n";
@@ -32,5 +44,7 @@ namespace RTX3000_notifier.Helper
 
             Console.WriteLine(toPrint + "\n------------------------");
         }
+
+        #endregion
     }
 }

@@ -1,15 +1,32 @@
-﻿using System;
+﻿using RTX3000_notifier.Helper;
+using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RestSharp;
-using RTX3000_notifier.Helper;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Coolblue" />.
+    /// </summary>
     class Coolblue : IWebsite
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
         public string Url { get; set; } = "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie";
 
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// /// The direct product url.
         public string GetProductUrl(Videocard card)
         {
             return card switch
@@ -21,6 +38,10 @@ namespace RTX3000_notifier.Model
             };
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
@@ -30,6 +51,16 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <param name="name">The name<see cref="string"/>.</param>
+        /// <param name="values">The values<see cref="Dictionary{Videocard, int}"/>.</param>
         private void GetStock(Videocard card, string name, Dictionary<Videocard, int> values)
         {
             string html = WebsiteDownloader.GetHtml(GetProductUrl(card));
@@ -45,5 +76,7 @@ namespace RTX3000_notifier.Model
             catch (Exception)
             { }
         }
+
+        #endregion
     }
 }

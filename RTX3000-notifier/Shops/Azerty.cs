@@ -1,13 +1,31 @@
-﻿using System;
+﻿using RestSharp;
+using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
-using RestSharp;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Azerty" />.
+    /// </summary>
     class Azerty : IWebsite
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
         public string Url { get; set; } = "https://azerty.nl/category/componenten/videokaarten/nvidia_geforce#!sorting=15&limit=96&view=rows&Videochip_generatie=GeForce_3000&levertijd=green";
 
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// /// The direct product url.
         public string GetProductUrl(Videocard card)
         {
             return card switch
@@ -19,6 +37,10 @@ namespace RTX3000_notifier.Model
             };
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             string html = DownloadHtml();
@@ -44,6 +66,14 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values2);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Download html content.
+        /// </summary>
+        /// /// The direct product url.
         private string DownloadHtml()
         {
             var client = new RestClient("https://azerty.nl/system/modules/ajax/lib/webservice/load.php");
@@ -56,6 +86,12 @@ namespace RTX3000_notifier.Model
             return response.Content;
         }
 
+        /// <summary>
+        /// Parse the html to retrieve the stock.
+        /// </summary>
+        /// <param name="html">The html<see cref="string"/>.</param>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// <returns>The <see cref="int"/>.</returns>
         private int CheckHtmlForStock(string html, Videocard card)
         {
             string str = "GeForce RTX ";
@@ -73,7 +109,7 @@ namespace RTX3000_notifier.Model
                     break;
             }
 
-            if(html != "")
+            if (html != "")
             {
                 try
                 {
@@ -91,5 +127,7 @@ namespace RTX3000_notifier.Model
                 return -1;
             }
         }
+
+        #endregion
     }
 }

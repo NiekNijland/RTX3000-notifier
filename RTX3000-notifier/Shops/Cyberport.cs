@@ -1,20 +1,34 @@
-﻿using System;
+﻿using RTX3000_notifier.Model;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using RestSharp;
-using RTX3000_notifier.Helper;
 
-namespace RTX3000_notifier.Model
+namespace RTX3000_notifier.Shop
 {
+    /// <summary>
+    /// Defines the <see cref="Cyberport" />.
+    /// </summary>
     class Cyberport : IWebsite
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Url.
+        /// </summary>
         public string Url { get; set; } = "https://www.cyberport.de/pc-und-zubehoer/komponenten/grafikkarten/nvidia-fuer-gaming.html?productsPerPage=100&sort=popularity&2E_Grafikchip=GeForce%20RTX%203070,GeForce%20RTX%203080,GeForce%20RTX%203090&page=1&stockLevelStatus=IMMEDIATELY";
 
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// The direct product url.
+        /// </summary>
+        /// <param name="card">The card<see cref="Videocard"/>.</param>
+        /// /// The direct product url.
         public string GetProductUrl(Videocard card)
         {
             return card switch
@@ -26,6 +40,10 @@ namespace RTX3000_notifier.Model
             };
         }
 
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <returns>The <see cref="Stock"/>.</returns>
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
@@ -35,6 +53,17 @@ namespace RTX3000_notifier.Model
             return new Stock(this, values);
         }
 
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Get the stock.
+        /// </summary>
+        /// <param name="url">The url<see cref="string"/>.</param>
+        /// <param name="name">The name<see cref="string"/>.</param>
+        /// <param name="values">The values<see cref="Dictionary{Videocard, int}"/>.</param>
+        /// <returns>The <see cref="int"/>.</returns>
         private int GetStock(string url, string name, Dictionary<Videocard, int> values)
         {
             string html = GetHTML(url).Result;
@@ -52,6 +81,11 @@ namespace RTX3000_notifier.Model
             return -1;
         }
 
+        /// <summary>
+        /// The GetHTML.
+        /// </summary>
+        /// <param name="url">The url<see cref="string"/>.</param>
+        /// <returns>The <see cref="Task{string}"/>.</returns>
         private static async Task<string> GetHTML(string url)
         {
             var handler = new HttpClientHandler
@@ -73,5 +107,7 @@ namespace RTX3000_notifier.Model
                 }
             }
         }
+
+        #endregion
     }
 }
