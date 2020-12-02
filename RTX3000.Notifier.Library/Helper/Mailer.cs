@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Xml;
+using Windows.System;
 using Windows.UI.Notifications;
 
 namespace RTX3000.Notifier.Library.Helper
@@ -14,6 +15,11 @@ namespace RTX3000.Notifier.Library.Helper
     public static class Mailer
     {
         #region Public
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static String ProductUrl = "";
 
         /// <summary>
         /// Send notifications threaded.
@@ -63,9 +69,10 @@ namespace RTX3000.Notifier.Library.Helper
         /// <param name="subscriber">The subscriber<see cref="Subscriber"/>.</param>
         public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
+            ProductUrl = stock.Website.GetProductUrl(videocard);
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
-                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
+                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{ProductUrl}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
             SendMail(subscriber.Email, subject, body);
@@ -140,6 +147,7 @@ namespace RTX3000.Notifier.Library.Helper
         {
             if (!Constants.GetUseToasts())
                 return;
+
             var template = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
             var textNodes = template.GetElementsByTagName("text").ToList();
             foreach (var textNode in textNodes)
@@ -151,11 +159,17 @@ namespace RTX3000.Notifier.Library.Helper
             {
                 Tag = "RTX 30XX Notifier",
                 Group = "RTX30XX",
-                ExpirationTime = DateTimeOffset.Now.AddMinutes(5)
+                ExpirationTime = DateTimeOffset.Now.AddMinutes(5),
             };
 
+            toast.Activated += toast_Activated;
             var notifier = ToastNotificationManager.CreateToastNotifier(subject);
             notifier.Show(toast);
+        }
+
+        public async static void toast_Activated(ToastNotification sender, object args)
+        {
+            await Launcher.LaunchUriAsync(new Uri(!string.IsNullOrEmpty(ProductUrl) ? ProductUrl : "https://geforce.nieknijland.com/"));
         }
 
         #endregion
