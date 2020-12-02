@@ -16,7 +16,7 @@ namespace RTX3000.Notifier.Library.Shop
         /// <summary>
         /// Gets or sets the Url.
         /// </summary>
-        public string Url { get; set; } = "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060%2C+3080%2C+3070%2C+3060&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634";
+        public string Url { get; set; } = "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060%2C+3080%2C+3070%2C+3060";
 
         #endregion
 
@@ -31,10 +31,10 @@ namespace RTX3000.Notifier.Library.Shop
         {
             return card switch
             {
-                Videocard.RTX3060TI => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
-                Videocard.RTX3070 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3070&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
-                Videocard.RTX3080 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3080&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
-                Videocard.RTX3090 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3090&security_token=60%3A36524297ff68fb75d5b2a63f11b733fa%3A46634",
+                Videocard.RTX3060TI => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3060",
+                Videocard.RTX3070 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3070",
+                Videocard.RTX3080 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3080",
+                Videocard.RTX3090 => "https://www.pcking.de/eshop.php?action=like_search&shopfilter_category=&s_group_id=*&s_order_name=&onlygroups=0&s_available=&articlelist_type=search&s_volltext=3090",
                 _ => Url,
             };
         }
