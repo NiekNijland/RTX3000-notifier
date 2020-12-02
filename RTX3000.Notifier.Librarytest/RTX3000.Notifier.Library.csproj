@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA80B48E-0E75-4EEC-952D-E6145A408DA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RTX3000.Notifier.Library</RootNamespace>
+    <AssemblyName>RTX3000.Notifier.Library2</AssemblyName>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.WindowsRuntime" />
+    <Reference Include="Windows.Data" />
+    <Reference Include="Windows.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\Logger.cs" />
+    <Compile Include="Helper\Mailer.cs" />
+    <Compile Include="Helper\MockData.cs" />
+    <Compile Include="Helper\Printer.cs" />
+    <Compile Include="Helper\WebsiteDownloader.cs" />
+    <Compile Include="Model\IWebsite.cs" />
+    <Compile Include="Model\Notifier.cs" />
+    <Compile Include="Model\Stock.cs" />
+    <Compile Include="Model\Subscriber.cs" />
+    <Compile Include="Model\Videocard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shops\Alternate.cs" />
+    <Compile Include="Shops\Amazon.cs" />
+    <Compile Include="Shops\Azerty.cs" />
+    <Compile Include="Shops\Cdromland.cs" />
+    <Compile Include="Shops\Centralpoint.cs" />
+    <Compile Include="Shops\Coolblue.cs" />
+    <Compile Include="Shops\Cyberport.cs" />
+    <Compile Include="Shops\Informatique.cs" />
+    <Compile Include="Shops\MaxICT.cs" />
+    <Compile Include="Shops\Megekko.cs" />
+    <Compile Include="Shops\PCKing.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
