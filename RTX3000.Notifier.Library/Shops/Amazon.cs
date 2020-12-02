@@ -72,7 +72,7 @@ namespace RTX3000.Notifier.Library.Shop
                 html = html.Replace(@"\", string.Empty);
                 var splittedHtml = html.Split("class=\"sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32\"");
                 var filteredByName = splittedHtml.Where(o => o.Contains(name) && !o.Contains("DOCTYPE")).ToList();
-                var filtered = filteredByName.Where(o => !o.Contains("niet op voorraad") && (o.Contains("bezorging") || o.Contains("verzendkosten") || o.Contains("Nog slechts 1 op voorraad."))).ToList();
+                var filtered = filteredByName.Where(o => !o.Contains("niet op voorraad") && (o.Contains("bezorging") || o.Contains("verzending") || o.Contains("verzendkosten") || o.Contains("Nog slechts 1 op voorraad."))).ToList();
                 values.Add(card, filtered.Count());
             }
             catch (Exception)
