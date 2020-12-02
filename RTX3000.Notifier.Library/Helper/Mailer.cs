@@ -72,10 +72,9 @@ namespace RTX3000.Notifier.Library.Helper
         /// <param name="subscriber">The subscriber<see cref="Subscriber"/>.</param>
         public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
-            ProductUrl = stock.Website.GetProductUrl(videocard);
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
-                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{ProductUrl}\">{stock.Website.GetType().Name}</a><br><br>" +
+                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
             SendMail(subscriber.Email, subject, body);
@@ -171,7 +170,6 @@ namespace RTX3000.Notifier.Library.Helper
                 smtp.EnableSsl = true;
 
                 smtp.Send(mail);
-                SendToast(subject, body);
                 Logger.EmailSend(email);
             }
             catch (Exception)

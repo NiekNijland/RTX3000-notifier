@@ -136,7 +136,8 @@ namespace RTX3000.Notifier.Library.Model
             {
                 if (this.stockRecords[website] != null && this.stockRecords[website].Values[videocard] < stock.Values[videocard])
                 {
-                        Mailer.SendToast(stock.Website.GetType().Name, stock.Website.GetType().Name + " has a " + Enum.GetName(typeof(Videocard), videocard));
+                    Mailer.ProductUrl = stock.Website.GetProductUrl(videocard);
+                    Mailer.SendToast(stock.Website.GetType().Name, stock.Website.GetType().Name + " has a " + Enum.GetName(typeof(Videocard), videocard));
                     Mailer.SendNotificationsThreaded(stock, videocard);
                     Logger.StockUpdate(stock, videocard);
                     ret = true;
