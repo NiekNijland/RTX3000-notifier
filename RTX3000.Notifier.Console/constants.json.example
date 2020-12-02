@@ -9,5 +9,5 @@
   "errorlogaddress": "",
   "verbosemode": true,
   "usetoast": true,
-  "useMongoDb": true
+  "useMongoDb": false
 }

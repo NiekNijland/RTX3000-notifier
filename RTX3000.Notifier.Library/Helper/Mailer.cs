@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading;
-using System.Xml;
+using Windows.System;
 using Windows.UI.Notifications;
 
 namespace RTX3000.Notifier.Library.Helper
@@ -13,6 +13,15 @@ namespace RTX3000.Notifier.Library.Helper
     /// </summary>
     public static class Mailer
     {
+        #region Variables
+
+        /// <summary>
+        /// Defines the ProductUrl.
+        /// </summary>
+        public static String ProductUrl = "";
+
+        #endregion
+
         #region Public
 
         /// <summary>
@@ -63,9 +72,10 @@ namespace RTX3000.Notifier.Library.Helper
         /// <param name="subscriber">The subscriber<see cref="Subscriber"/>.</param>
         public static void SendNotification(Stock stock, Videocard videocard, Subscriber subscriber)
         {
+            ProductUrl = stock.Website.GetProductUrl(videocard);
             string subject = $"GeForceTracker: {Enum.GetName(typeof(Videocard), videocard)}";
             string body = "Beste Lezer,<br><br>" +
-                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{stock.Website.GetProductUrl(videocard)}\">{stock.Website.GetType().Name}</a><br><br>" +
+                        $"De voorraad van {Enum.GetName(typeof(Videocard), videocard)} is aangevuld bij <a href=\"{ProductUrl}\">{stock.Website.GetType().Name}</a><br><br>" +
                         "Wees er snel bij!<br><br>" +
                         $"<a href=\"https://geforce.nieknijland.com/voorkeuren/{subscriber.Id}\">Emailvoorkeur aanpassen</a>";
             SendMail(subscriber.Email, subject, body);
@@ -90,6 +100,45 @@ namespace RTX3000.Notifier.Library.Helper
             string body = "GeForceTracker meld het volgende:<br><br>" + log;
 
             SendMail(Constants.GetErrorLogAddress(), subject, body);
+        }
+
+        /// <summary>
+        /// Send the actual email to the smtp server.
+        /// </summary>
+        /// <param name="subject">The subject<see cref="string"/>.</param>
+        /// <param name="body">The body<see cref="string"/>.</param>
+        public static void SendToast(string subject, string body = null)
+        {
+            if (!Constants.GetUseToasts())
+                return;
+
+            var template = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+            var textNodes = template.GetElementsByTagName("text").ToList();
+            foreach (var textNode in textNodes)
+            {
+                textNode.AppendChild(template.CreateTextNode(body));
+            }
+
+            var toast = new ToastNotification(template)
+            {
+                Tag = "RTX 30XX Notifier",
+                Group = "RTX30XX",
+                ExpirationTime = DateTimeOffset.Now.AddMinutes(5),
+            };
+
+            toast.Activated += toast_Activated;
+            var notifier = ToastNotificationManager.CreateToastNotifier(subject);
+            notifier.Show(toast);
+        }
+
+        /// <summary>
+        /// The toast_Activated.
+        /// </summary>
+        /// <param name="sender">The sender<see cref="ToastNotification"/>.</param>
+        /// <param name="args">The args<see cref="object"/>.</param>
+        public async static void toast_Activated(ToastNotification sender, object args)
+        {
+            await Launcher.LaunchUriAsync(new Uri(!string.IsNullOrEmpty(ProductUrl) ? ProductUrl : "https://geforce.nieknijland.com/"));
         }
 
         #endregion
@@ -129,33 +178,6 @@ namespace RTX3000.Notifier.Library.Helper
             {
                 Logger.EmailError(email);
             }
-        }
-
-        /// <summary>
-        /// Send the actual email to the smtp server.
-        /// </summary>
-        /// <param name="subject">The subject<see cref="string"/>.</param>
-        /// <param name="body">The body<see cref="string"/>.</param>
-        public static void SendToast(string subject, string body = null)
-        {
-            if (!Constants.GetUseToasts())
-                return;
-            var template = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
-            var textNodes = template.GetElementsByTagName("text").ToList();
-            foreach (var textNode in textNodes)
-            {
-                textNode.AppendChild(template.CreateTextNode(body));
-            }
-
-            var toast = new ToastNotification(template)
-            {
-                Tag = "RTX 30XX Notifier",
-                Group = "RTX30XX",
-                ExpirationTime = DateTimeOffset.Now.AddMinutes(5)
-            };
-
-            var notifier = ToastNotificationManager.CreateToastNotifier(subject);
-            notifier.Show(toast);
         }
 
         #endregion

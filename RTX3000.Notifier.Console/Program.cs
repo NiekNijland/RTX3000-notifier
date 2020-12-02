@@ -1,6 +1,7 @@
 ﻿using RTX3000.Notifier.Library.Shop;
 using RTX3000.Notifier.Library.Model;
 using System;
+using RTX3000.Notifier.Library.Helper;
 
 namespace RTX3000.Notifier
 {
@@ -31,7 +32,8 @@ namespace RTX3000.Notifier
             //notifier.TrackWebsite(new MaxICT());
 
             notifier.Start();
-            RTX3000.Notifier.Library.Helper.Mailer.SendToast("RTX 3000 notifier started", "");
+            if(Constants.GetUseToasts())
+                RTX3000.Notifier.Library.Helper.Mailer.SendToast("RTX 3000 notifier started", "");
             Console.ReadLine();
         }
     }
