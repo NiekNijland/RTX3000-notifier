@@ -11,6 +11,7 @@
 - coolblue.nl
 - cyberport.de
 - centralpoint.nl
+- pcking.de
 
 disabled for now:
 - maxict.nl
