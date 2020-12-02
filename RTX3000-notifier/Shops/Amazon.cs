@@ -31,6 +31,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.amazon.nl/s?k=3060&i=electronics&bbn=16366443031&rh=n%3A16366443031&dc&__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1606476830&rnid=16332311031&ref=sr_nr_p_n_availability_2",
                 Videocard.RTX3070 => "https://www.amazon.nl/s?k=3070&i=electronics&bbn=16366443031&rh=n%3A16366443031&dc&__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1606476830&rnid=16332311031&ref=sr_nr_p_n_availability_2",
                 Videocard.RTX3080 => "https://www.amazon.nl/s?k=3080&i=electronics&bbn=16366443031&rh=n%3A16366443031&dc&__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1606476830&rnid=16332311031&ref=sr_nr_p_n_availability_2",
                 Videocard.RTX3090 => "https://www.amazon.nl/s?k=3090&i=electronics&bbn=16366443031&rh=n%3A16366443031&dc&__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&qid=1606476830&rnid=16332311031&ref=sr_nr_p_n_availability_2",
@@ -45,6 +46,7 @@ namespace RTX3000_notifier.Shop
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
+            GetStock(Videocard.RTX3060TI, "RTX 3060", values);
             GetStock(Videocard.RTX3070, "RTX 3070", values);
             GetStock(Videocard.RTX3080, "RTX 3080", values);
             GetStock(Videocard.RTX3090, "RTX 3090", values);

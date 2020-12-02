@@ -30,6 +30,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3060_ti#!sorting=12&limit=30&view=grid",
                 Videocard.RTX3070 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3070#!sorting=12&limit=30&view=grid",
                 Videocard.RTX3080 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3080#!sorting=12&limit=30&view=grid",
                 Videocard.RTX3090 => "https://azerty.nl/componenten/videokaarten/nvidia_geforce/nvidia_geforce_rtx_3090#!sorting=12&limit=30&view=grid",
@@ -98,6 +99,9 @@ namespace RTX3000_notifier.Shop
 
             switch (card)
             {
+                case Videocard.RTX3060TI:
+                    str += "3060";
+                    break;
                 case Videocard.RTX3070:
                     str += "3070";
                     break;

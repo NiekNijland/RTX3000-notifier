@@ -6,6 +6,11 @@
     public enum Videocard
     {
         /// <summary>
+        /// Defines the RTX3060 ti Videocard.
+        /// </summary>
+        RTX3060TI,
+
+        /// <summary>
         /// Defines the RTX3070 Videocard.
         /// </summary>
         RTX3070,

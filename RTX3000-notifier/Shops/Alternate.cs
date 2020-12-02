@@ -30,6 +30,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.alternate.nl/Grafische-kaarten/RTX-3060-ti/html/listings/1599465706202?lk=29309&sort=AVAILABILITY&order=ASC&hideFilter=false&filter_-2=true",
                 Videocard.RTX3070 => "https://www.alternate.nl/Grafische-kaarten/RTX-3070/html/listings/1599465706202?lk=29309&sort=AVAILABILITY&order=ASC&hideFilter=false&filter_-2=true",
                 Videocard.RTX3080 => "https://www.alternate.nl/Grafische-kaarten/RTX-3080/html/listings/1599465397714?lk=29308&sort=AVAILABILITY&order=ASC&hideFilter=false&filter_-2=true",
                 Videocard.RTX3090 => "https://www.alternate.nl/Grafische-kaarten/RTX-3090/html/listings/1599465355613?lk=29307&sort=AVAILABILITY&order=ASC&hideFilter=false&filter_-2=true",
@@ -71,6 +72,9 @@ namespace RTX3000_notifier.Shop
 
             switch (card)
             {
+                case Videocard.RTX3060TI:
+                    str += "3060";
+                    break;
                 case Videocard.RTX3070:
                     str += "3070";
                     break;

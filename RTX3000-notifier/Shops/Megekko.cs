@@ -30,6 +30,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3060?f=f_vrrd-0_s-populair_pp-50_p-1_d-list_cf-",
                 Videocard.RTX3070 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3070?f=f_vrrd-0_s-populair_pp-50_p-1_d-list_cf-",
                 Videocard.RTX3080 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3080?f=f_vrrd-1_s-populair_pp-50_p-1_d-list_cf-",
                 Videocard.RTX3090 => "https://www.megekko.nl/Computer/Componenten/Videokaarten/Nvidia-Videokaarten/Graphics-Engine/GeForce-RTX-3090?f=f_vrrd-1_s-populair_pp-50_p-1_d-list_cf-",
@@ -70,6 +71,9 @@ namespace RTX3000_notifier.Shop
 
             switch (card)
             {
+                case Videocard.RTX3060TI:
+                    str += "3060";
+                    break;
                 case Videocard.RTX3070:
                     str += "3070";
                     break;

@@ -104,6 +104,9 @@ namespace RTX3000_notifier.Shop
 
             switch (card)
             {
+                case Videocard.RTX3060TI:
+                    str += "3060";
+                    break;
                 case Videocard.RTX3070:
                     str += "3070";
                     break;

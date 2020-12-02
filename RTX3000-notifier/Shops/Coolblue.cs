@@ -31,6 +31,7 @@ namespace RTX3000_notifier.Shop
         {
             return card switch
             {
+                Videocard.RTX3060TI => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-rtx-3060-ti",
                 Videocard.RTX3070 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-rtx-3070",
                 Videocard.RTX3080 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie/nvidia-geforce-rtx-3080",
                 Videocard.RTX3090 => "https://www.coolblue.nl/videokaarten/nvidia-chipset/nvidia-geforce-rtx-3000-serie/nvidia-geforce-rtx-3090",
@@ -45,6 +46,7 @@ namespace RTX3000_notifier.Shop
         public Stock GetStock()
         {
             Dictionary<Videocard, int> values = new Dictionary<Videocard, int>();
+            GetStock(Videocard.RTX3060TI, "RTX 3060", values);
             GetStock(Videocard.RTX3070, "RTX 3070", values);
             GetStock(Videocard.RTX3080, "RTX 3080", values);
             GetStock(Videocard.RTX3090, "RTX 3090", values);
