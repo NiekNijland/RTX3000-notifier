@@ -12,6 +12,7 @@
 - cyberport.de
 - centralpoint.nl
 - pcking.de
+- casekings.de
 
 disabled for now:
 - maxict.nl
