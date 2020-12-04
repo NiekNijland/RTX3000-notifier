@@ -29,8 +29,9 @@ namespace RTX3000.Notifier
             notifier.TrackWebsite(new Amazon());
             notifier.TrackWebsite(new Centralpoint());
             notifier.TrackWebsite(new PCKing());
+            notifier.TrackWebsite(new CaseKing());
             //notifier.TrackWebsite(new MaxICT());
-
+            
             notifier.Start();
             if(Constants.GetUseToasts())
                 RTX3000.Notifier.Library.Helper.Mailer.SendToast("RTX 3000 notifier started", "");
